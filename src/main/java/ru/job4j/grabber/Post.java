@@ -24,14 +24,10 @@ public class Post {
             return false;
         }
         Post post = (Post) o;
-<<<<<<< HEAD
         return Objects.equals(title, post.title)
                 && Objects.equals(link, post.link)
                 && Objects.equals(description, post.description)
                 && Objects.equals(created, post.created);
-=======
-        return Objects.equals(title, post.title) && Objects.equals(link, post.link) && Objects.equals(description, post.description) && Objects.equals(created, post.created);
->>>>>>> origin/main
     }
 
     @Override
