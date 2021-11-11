@@ -5,9 +5,21 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SqlRuParse {
+
+    public List<String> postDetails(String url) throws Exception {
+        Document doc = Jsoup.connect(url).get();
+        Element footer = doc.select(".msgFooter").get(0);
+        Element post = footer.parent().parent().child(1).child(1);
+        List<String> rsl = new ArrayList<>();
+        rsl.add(footer.text().split(" \\[")[0]);
+        rsl.add(post.text());
+        return rsl;
+    }
+
     public static void main(String[] args) throws Exception {
         String url = "https://www.sql.ru/forum/job-offers";
         List<String> pages = List.of("", "/2", "/3", "/4", "/5");
