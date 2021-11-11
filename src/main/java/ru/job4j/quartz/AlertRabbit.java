@@ -9,9 +9,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Properties;
 
 import static org.quartz.JobBuilder.*;
@@ -20,14 +17,9 @@ import static org.quartz.SimpleScheduleBuilder.*;
 
 public class AlertRabbit {
 
-    public static Properties loadConfig() {
+    public static Properties loadConfig() throws Exception {
         Properties properties = new Properties();
-        try (InputStream in = AlertRabbit.class.getClassLoader().getResourceAsStream(
-                "rabbit.properties")) {
-            properties.load(in);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        properties.load(new FileInputStream("rabbit.properties"));
         return properties;
     }
 
