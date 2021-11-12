@@ -21,10 +21,13 @@ public class SqlRuParse implements Parse {
     @Override
     public List<Post> list(String link) {
         List<Post> list = new ArrayList<>();
+        List<String> pages = List.of("", "/2", "/3", "/4", "/5");
         try {
-            Document doc = Jsoup.connect(link).get();
-            Elements rows = doc.select(".postslisttopic");
-            rows.forEach(r -> list.add(details(r.child(0).attr("href"))));
+            for (String page : pages) {
+                Document doc = Jsoup.connect(link + page).get();
+                Elements rows = doc.select(".postslisttopic");
+                rows.forEach(r -> list.add(details(r.child(0).attr("href"))));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
