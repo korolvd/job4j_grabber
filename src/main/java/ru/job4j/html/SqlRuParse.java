@@ -16,10 +16,13 @@ public class SqlRuParse {
         Post post = new Post();
         Document doc = Jsoup.connect(url).get();
         Element footer = doc.select(".msgFooter").get(0);
+        Element title = footer.parent().parent().child(0).child(0);
         Element description = footer.parent().parent().child(1).child(1);
         LocalDateTime created = new SqlRuDateTimeParse().parse(footer.text().split(" \\[")[0]);
-        post.setCreated(created);
+        post.setTitle(title.text());
+        post.setLink(url);
         post.setDescription(description.text());
+        post.setCreated(created);
         return post;
     }
 
