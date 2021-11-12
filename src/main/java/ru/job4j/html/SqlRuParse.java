@@ -4,20 +4,23 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import ru.job4j.grabber.Post;
+import ru.job4j.grabber.utils.SqlRuDateTimeParse;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class SqlRuParse {
 
-    public List<String> postDetails(String url) throws Exception {
+    public Post postDetails(String url) throws Exception {
+        Post post = new Post();
         Document doc = Jsoup.connect(url).get();
         Element footer = doc.select(".msgFooter").get(0);
-        Element post = footer.parent().parent().child(1).child(1);
-        List<String> rsl = new ArrayList<>();
-        rsl.add(footer.text().split(" \\[")[0]);
-        rsl.add(post.text());
-        return rsl;
+        Element description = footer.parent().parent().child(1).child(1);
+        LocalDateTime created = new SqlRuDateTimeParse().parse(footer.text().split(" \\[")[0]);
+        post.setCreated(created);
+        post.setDescription(description.text());
+        return post;
     }
 
     public static void main(String[] args) throws Exception {
