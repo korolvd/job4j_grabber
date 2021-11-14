@@ -4,4 +4,4 @@ name text,
 text text,
 link text unique,
 created_date timestamp
-);
+)
