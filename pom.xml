@@ -32,7 +32,7 @@
         <profile>
             <id>production</id>
             <properties>
-                <db.url>jdbc:postgresql://127.0.0.1:5432/tracker</db.url>
+                <db.url>jdbc:postgresql://127.0.0.1:5432/postgres</db.url>
                 <db.username>postgres</db.username>
                 <db.password>password</db.password>
                 <db.driver>org.postgresql.Driver</db.driver>
@@ -107,7 +107,7 @@
                             <finalName>grabber</finalName>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>ru.job4j.Grabber</mainClass>
+                                    <mainClass>ru.job4j.grabber.PsqlStore</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
